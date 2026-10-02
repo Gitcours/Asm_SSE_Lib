@@ -1,17 +1,19 @@
 #include <iostream>
+#include "nanobench.h"
 
 #include "Vec4.h"
 #include "Vec3.h"
 
 int main() {
+    Vec3 a(25, 48, 15);
+    Vec3 b(84, 14, 96);
 
+    ankerl::nanobench::Bench bench;
 
-	Vec3 a(25, 48, 15);
-	Vec3 b(84, 14, 96);
+    bench.run("Vec3 addition", [&] {
+        Vec3 c = a + b;
+        ankerl::nanobench::doNotOptimizeAway(c);
+        });
 
-	Vec3 c(a + b);
-
-	std::cout << c.x() << " " << c.y() << " " << c.z();
-
-	return 0;
+    return 0;
 }

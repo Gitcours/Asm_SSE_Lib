@@ -128,7 +128,6 @@
     <ClCompile Include="nanobench.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\nanobench.h" />
     <ClInclude Include="Vec3.h" />
     <ClInclude Include="Vec4.h" />
   </ItemGroup>
