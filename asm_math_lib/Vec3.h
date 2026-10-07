@@ -1,9 +1,6 @@
 #pragma once
-#ifndef VEC3_SSE_H
-#define VEC3_SSE_H
 
 #include <xmmintrin.h>
-//#include <smmintrin.h>
 
 class alignas(16) Vec3
 {
@@ -116,10 +113,10 @@ public:
         __m128 mul = _mm_mul_ps(v, rhs.v);
 
         // x + y + z
-        __m128 shuf = _mm_movehdup_ps(mul);
+        __m128 shuf = _mm_shuffle_ps(mul, mul, _MM_SHUFFLE(2, 3, 2, 3));
         __m128 sums = _mm_add_ps(mul, shuf);
 
-        shuf = _mm_movehl_ps(shuf, sums);
+        shuf = _mm_shuffle_ps(sums, sums, _MM_SHUFFLE(1, 1, 1, 1));
         sums = _mm_add_ss(sums, shuf);
 
         return _mm_cvtss_f32(sums);
@@ -132,14 +129,9 @@ public:
         __m128 a_yzx = _mm_shuffle_ps(v, v, _MM_SHUFFLE(3, 0, 2, 1));
         __m128 b_yzx = _mm_shuffle_ps(rhs.v, rhs.v, _MM_SHUFFLE(3, 0, 2, 1));
 
-        __m128 c = _mm_sub_ps(
-            _mm_mul_ps(v, b_yzx),
-            _mm_mul_ps(a_yzx, rhs.v)
-        );
+        __m128 c = _mm_sub_ps(_mm_mul_ps(v, b_yzx),_mm_mul_ps(a_yzx, rhs.v));
 
-        return Vec3(
-            _mm_shuffle_ps(c, c, _MM_SHUFFLE(3, 0, 2, 1))
-        );
+        return Vec3(_mm_shuffle_ps(c, c, _MM_SHUFFLE(3, 0, 2, 1)));
     }
 
     // Longueur
@@ -151,9 +143,7 @@ public:
 
     float length() const
     {
-        return _mm_cvtss_f32(
-            _mm_sqrt_ss(_mm_set_ss(lengthSquared()))
-        );
+        return _mm_cvtss_f32(_mm_sqrt_ss(_mm_set_ss(lengthSquared())));
     }
 
     // Normalisation
@@ -162,8 +152,7 @@ public:
     {
         float lenSq = lengthSquared();
 
-        if (lenSq <= 0.0f)
-            return Vec3();
+        if (lenSq <= 0.0f) return Vec3();
 
         __m128 lenSq4 = _mm_set1_ps(lenSq);
         __m128 invLen = _mm_rsqrt_ps(lenSq4);
@@ -172,20 +161,8 @@ public:
         const __m128 half = _mm_set1_ps(0.5f);
         const __m128 three = _mm_set1_ps(3.0f);
 
-        invLen = _mm_mul_ps(
-            invLen,
-            _mm_mul_ps(
-                half,
-                _mm_sub_ps(
-                    three,
-                    _mm_mul_ps(
-                        lenSq4,
-                        _mm_mul_ps(invLen, invLen)
-                    )
-                )
-            )
-        );
-
+        invLen = _mm_mul_ps(invLen, _mm_mul_ps(half,_mm_sub_ps(three,_mm_mul_ps(lenSq4,_mm_mul_ps(invLen, invLen)))));
+        
         return Vec3(_mm_mul_ps(v, invLen));
     }
 
@@ -222,12 +199,9 @@ public:
 
     Vec3 abs() const
     {
-        const __m128 signMask =
-            _mm_set1_ps(-0.0f);
+        const __m128 signMask = _mm_set1_ps(-0.0f);
 
-        return Vec3(
-            _mm_andnot_ps(signMask, v)
-        );
+        return Vec3(_mm_andnot_ps(signMask, v));
     }
 
     // Lerp
@@ -236,16 +210,6 @@ public:
     {
         __m128 t4 = _mm_set1_ps(t);
 
-        return Vec3(
-            _mm_add_ps(
-                a.v,
-                _mm_mul_ps(
-                    _mm_sub_ps(b.v, a.v),
-                    t4
-                )
-            )
-        );
+        return Vec3(_mm_add_ps(a.v,_mm_mul_ps(_mm_sub_ps(b.v, a.v),t4)));
     }
 };
-
-#endif // VEC3_SSE_H
