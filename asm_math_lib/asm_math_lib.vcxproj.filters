@@ -13,24 +13,56 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Math">
+      <UniqueIdentifier>{5d2865f1-0836-4199-9c86-dc20061b487d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\ASM">
+      <UniqueIdentifier>{340fb49b-e0f0-4ddb-9843-bd40314a131d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\SIMD">
+      <UniqueIdentifier>{dab11e43-0746-4ae4-b993-7924697d9754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Benchmark">
+      <UniqueIdentifier>{18bb1568-45c8-46dc-b356-05a6f92f9996}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="nanobench.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Mat4x4.h">
+      <Filter>Fichiers d%27en-tête\Math</Filter>
+    </ClInclude>
     <ClInclude Include="Vec3.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Math</Filter>
     </ClInclude>
     <ClInclude Include="Vec4.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Mat4x4.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Batch.h">
+      <Filter>Fichiers d%27en-tête\Math</Filter>
     </ClInclude>
+    <ClInclude Include="BatchSIMD.h">
+      <Filter>Fichiers d%27en-tête\SIMD</Filter>
+    </ClInclude>
+    <ClInclude Include="BatchValidation.h">
+      <Filter>Fichiers d%27en-tête\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="BatchSOA.h">
+      <Filter>Fichiers d%27en-tête\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="BatchSoASIMD.h">
+      <Filter>Fichiers d%27en-tête\SIMD</Filter>
+    </ClInclude>
+    <ClInclude Include="DotVec3ASM.h">
+      <Filter>Fichiers d%27en-tête\ASM</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="DotVec3ASM.asm">
+      <Filter>Fichiers d%27en-tête\ASM</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
