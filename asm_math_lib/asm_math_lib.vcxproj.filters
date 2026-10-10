@@ -65,4 +65,8 @@
       <Filter>Fichiers d%27en-tête\ASM</Filter>
     </MASM>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
+    <None Include="rapport.md" />
+  </ItemGroup>
 </Project>

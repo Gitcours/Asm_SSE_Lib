@@ -676,7 +676,7 @@ void RunDotBenchmark(std::size_t count)
     );
 
     bench.warmup(3);
-    bench.minEpochIterations(1200);
+    bench.minEpochIterations(13205);
 
 
     BenchmarkDotReference(
@@ -742,7 +742,7 @@ void RunNormalizeBenchmark(std::size_t count)
     );
 
     bench.warmup(3);
-    bench.minEpochIterations(1200);
+    bench.minEpochIterations(13205);
 
 
     BenchmarkNormalizeReference(
@@ -787,7 +787,7 @@ void RunTransformBenchmark(std::size_t count)
     );
 
     bench.warmup(3);
-    bench.minEpochIterations(1200);
+    bench.minEpochIterations(13205);
 
 
     BenchmarkTransformReference(
@@ -876,7 +876,7 @@ int main()
         << "Warm-up : 3\n";
 
     std::cout
-        << "Iterations minimales : 1200\n";
+        << "Iterations minimales : 13205\n";
 
 
     // ========================================================
